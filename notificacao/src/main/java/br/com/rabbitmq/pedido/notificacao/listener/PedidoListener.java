@@ -19,9 +19,6 @@ public class PedidoListener {
 
     @RabbitListener(queues = "pedidos.v1.pedido-criado-gerar-notificacao")
     public void enviarNotificacao(Pedido pedido){
-        if(pedido.getTotal()<=24){
-            throw  new RuntimeException("Erro ao enviar email");
-        }
         emailService.enviarEmail(pedido);
         logger.info("Notificação gerada "+ pedido.toString());
 
